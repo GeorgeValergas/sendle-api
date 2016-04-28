@@ -8,6 +8,10 @@ module Sendle
           raise Sendle::Api::Errors::MissingApiKey if Sendle::Api.api_key.nil?
         end
 
+        def self.json_headers
+          { accept: :json, content_type: :json }
+        end
+
       end
     end
   end
