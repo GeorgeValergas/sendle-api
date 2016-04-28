@@ -1,3 +1,5 @@
+require 'rest-client'
+
 require "sendle/api/version"
 
 module Sendle

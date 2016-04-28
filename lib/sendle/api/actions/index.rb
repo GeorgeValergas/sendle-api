@@ -1,5 +1,3 @@
-require 'rest-client'
-
 module Sendle
   module Api
     module Actions
