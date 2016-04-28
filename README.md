@@ -31,4 +31,10 @@ TODO: Write usage instructions here
 5. Create a new Pull Request
 
 ## Notes
+### Development
+1. Navigate to root of this project
+2. Run bundle install to install the gems specified in sendle-api.gemspec
+3. Run bundle exec rspec to run the tests
+
+### Guide 
 Follow this guide to build a gem: https://quickleft.com/blog/engineering-lunch-series-step-by-step-guide-to-building-your-first-ruby-gem
