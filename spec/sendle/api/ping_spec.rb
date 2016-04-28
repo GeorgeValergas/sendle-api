@@ -14,13 +14,15 @@ describe Sendle::Api::Ping do
     it_behaves_like "a resource action with credentials"
 
     it "makes the correct request" do
-      expect(RestClient::Request).to receive(:execute).
-        with(hash_including(json_headers.merge(
-          method: :get,
-          url: Sendle::Api::Ping.url,
-          user: sendle_id,
-          password: api_key
-        )))
+      expected_params = json_headers.merge(
+        method: :get,
+        url: Sendle::Api::Ping.url,
+        user: sendle_id,
+        password: api_key
+      )
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params))
+
+      Sendle::Api::Ping.index
     end
   end
 
