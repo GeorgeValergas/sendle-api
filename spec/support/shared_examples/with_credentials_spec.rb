@@ -4,6 +4,10 @@ shared_examples_for "a resource action with credentials" do
     described_resource = example.metadata[:described_class]
     described_action = example.metadata[:example_group][:parent_example_group][:parent_example_group][:description_args].first.gsub("#", "")
 
+    before do
+      allow(RestClient::Request).to receive(:execute)
+    end
+
     it "throws an missing sendle_id error" do
       Sendle::Api.sendle_id = nil
       Sendle::Api.api_key = 'fake-key'
