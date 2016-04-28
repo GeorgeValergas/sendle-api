@@ -10,7 +10,7 @@ describe Sendle::Api::Ping do
     Sendle::Api.sendle_id = sendle_id
   end
 
-  describe "#index" do
+  describe "#execute" do
     it_behaves_like "a resource action with credentials"
 
     it "makes the correct request" do
@@ -22,7 +22,23 @@ describe Sendle::Api::Ping do
       )
       expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params))
 
-      Sendle::Api::Ping.index
+      Sendle::Api::Ping.execute
+    end
+
+    it "returns a pong" do
+      expect(RestClient::Request).to receive(:execute)
+
+      pong = Sendle::Api::Ping.execute
+
+      expect(pong).to be_a Sendle::Api::Responses::Pong
+    end
+
+    it "handles unauthorized" do
+      expect(RestClient::Request).to receive(:execute).and_raise(UNAUTHORIZED_ERROR)
+
+      expect {
+        Sendle::Api::Ping.execute
+      }.to raise_error(Sendle::Api::Errors::Unauthorized)
     end
   end
 

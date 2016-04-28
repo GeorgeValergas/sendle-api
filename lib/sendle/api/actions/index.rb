@@ -14,8 +14,11 @@ module Sendle
             password: Sendle::Api.api_key,
             headers: Sendle::Api::Utils::Actions.json_headers
           )
+          Sendle::Api::Responses::Pong.new
+        rescue RestClient::Unauthorized => e 
+          response = JSON.parse(e.response)
+          raise Sendle::Api::Errors::Unauthorized.new(response['error_description'])
         end
-
       end
     end
   end
