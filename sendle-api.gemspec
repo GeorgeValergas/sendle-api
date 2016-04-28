@@ -6,11 +6,11 @@ require 'sendle/api/version'
 Gem::Specification.new do |spec|
   spec.name          = "sendle-api"
   spec.version       = Sendle::Api::VERSION
-  spec.authors       = ["mebobby2"]
-  spec.email         = ["bobl53@gmail.com\n"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.authors       = ["Bobby Lei"]
+  spec.email         = ["bobl53@gmail.com"]
+  spec.summary       = "Ruby bindings for the Sendle API"
+  spec.description   = "Sendle allows businesses to send parcels door to door for low flat-rates Australia wide. See https://www.sendle.com for details."
+  spec.homepage      = "http://api-doc.sendle.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
