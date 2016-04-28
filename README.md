@@ -36,5 +36,9 @@ TODO: Write usage instructions here
 2. Run bundle install to install the gems specified in sendle-api.gemspec
 3. Run bundle exec rake spec to run the tests
 
+### Release
+1. Make sure you have a RubyGems.org account
+2. bundle exec rake release
+
 ### Guide 
-Follow this guide to build a gem: https://quickleft.com/blog/engineering-lunch-series-step-by-step-guide-to-building-your-first-ruby-gem
+Based on this guide: https://quickleft.com/blog/engineering-lunch-series-step-by-step-guide-to-building-your-first-ruby-gem
