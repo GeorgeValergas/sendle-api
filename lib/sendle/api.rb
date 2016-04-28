@@ -2,6 +2,10 @@ require "sendle/api/version"
 
 module Sendle
   module Api
-    # Your code goes here...
+
+    class << self
+      attr_accessor :api_key, :sendle_id
+    end
+    
   end
 end
