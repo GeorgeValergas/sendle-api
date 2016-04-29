@@ -2,6 +2,8 @@ require 'rest-client'
 
 require "sendle/api/version"
 
+require 'stripe/api/ping'
+
 module Sendle
   module Api
 
