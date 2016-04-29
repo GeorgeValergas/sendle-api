@@ -10,7 +10,7 @@ require 'sendle/api/actions/index'
 # Api errors
 require 'sendle/api/errors/missing_api_key'
 require 'sendle/api/errors/missing_sendle_id'
-require 'sendle/api/errors/missing_unauthorized'
+require 'sendle/api/errors/unauthorized'
 
 # Api responses
 require 'sendle/api/responses/pong'
