@@ -15,6 +15,10 @@ class Sendle::Api::Quote
     def required_params
       %w( pickup_suburb pickup_postcode delivery_suburb delivery_postcode kilogram_weight)
     end
+
+    def process_response(response)
+      JSON.parse(response)
+    end
   end
 
 end

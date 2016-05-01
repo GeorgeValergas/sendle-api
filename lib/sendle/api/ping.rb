@@ -3,13 +3,18 @@ class Sendle::Api::Ping
 
   class << self
     alias_method :execute, :index
+
+    def url
+      Sendle::Api.base_url + "ping"
+    end
+
+    def include_credentials?
+      true
+    end
+
+    def process_response(response)
+      Sendle::Api::Responses::Pong.new
+    end
   end
 
-  def self.url
-    Sendle::Api.base_url + "ping"
-  end
-
-  def self.include_credentials?
-    true
-  end
 end

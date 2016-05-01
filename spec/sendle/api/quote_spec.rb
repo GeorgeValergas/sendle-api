@@ -23,7 +23,7 @@ describe Sendle::Api::Quote do
           params: params
         }
       }
-      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params))
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(QUOTE_NO_PLAN_RESPONSE)
 
       Sendle::Api::Quote.execute(params)
     end
@@ -35,7 +35,11 @@ describe Sendle::Api::Quote do
     end
 
     it "returns correct response" do
-      Sendle::Api::Quote.execute(params)
+      expect(RestClient::Request).to receive(:execute).and_return(QUOTE_NO_PLAN_RESPONSE)
+
+      response = Sendle::Api::Quote.execute(params)
+
+      expect(response).to eq JSON.parse(QUOTE_NO_PLAN_RESPONSE)
     end
 
     it "handles 422" do

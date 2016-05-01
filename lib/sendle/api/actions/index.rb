@@ -7,9 +7,8 @@ module Sendle
           Sendle::Api::Utils::Actions.check_for_missing_credentials if self.include_credentials?
           check_required_params(params)
 
-          RestClient::Request.execute(rest_client_params(params))
-
-          Sendle::Api::Responses::Pong.new
+          response = RestClient::Request.execute(rest_client_params(params))
+          self.process_response(response)
         rescue RestClient::Unauthorized, RestClient::PaymentRequired => e 
           raise Sendle::Api::Factories::Errors.new_error(e)
         end

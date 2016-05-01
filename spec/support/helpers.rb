@@ -7,3 +7,5 @@ end
 UNAUTHORIZED_ERROR = RestClient::Unauthorized.new("{\"error\":\"unauthorised\",\"error_description\":\"The authorisation details are not valid. Either the Sendle ID or API key are incorrect.\"}")
 
 PAYMENT_REQUIRED_ERROR = RestClient::PaymentRequired.new("{\"error\":\"payment_required\",\"error_description\":\"The account associated with this API key has no method of payment. Please go to your Account Settings in your Sendle Dashboard and add a payment method.\"}")
+
+QUOTE_NO_PLAN_RESPONSE = "[{\"quote\":{\"gross\":{\"amount\":9.75,\"currency\":\"AUD\"},\"net\":{\"amount\":8.86,\"currency\":\"AUD\"},\"tax\":{\"amount\":0.89,\"currency\":\"AUD\"}},\"plan_name\":\"Easy\"},{\"quote\":{\"gross\":{\"amount\":8.75,\"currency\":\"AUD\"},\"net\":{\"amount\":7.95,\"currency\":\"AUD\"},\"tax\":{\"amount\":0.8,\"currency\":\"AUD\"}},\"plan_name\":\"Premium\"},{\"quote\":{\"gross\":{\"amount\":5.98,\"currency\":\"AUD\"},\"net\":{\"amount\":5.44,\"currency\":\"AUD\"},\"tax\":{\"amount\":0.54,\"currency\":\"AUD\"}},\"plan_name\":\"Pro\"}]"
