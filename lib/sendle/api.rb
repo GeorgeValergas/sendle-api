@@ -4,6 +4,9 @@ require 'rest-client'
 # Version
 require "sendle/api/version"
 
+# Constants
+require "sendle/api/constants"
+
 # Api resource actions
 require 'sendle/api/actions/index'
 
@@ -16,6 +19,7 @@ require 'sendle/api/errors/missing_sendle_id'
 require 'sendle/api/errors/unauthorized'
 require 'sendle/api/errors/payment_required'
 require 'sendle/api/errors/missing_params'
+require 'sendle/api/errors/invalid_plan'
 
 # Api responses
 require 'sendle/api/responses/pong'

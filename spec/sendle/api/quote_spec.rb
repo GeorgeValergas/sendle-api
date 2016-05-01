@@ -42,7 +42,29 @@ describe Sendle::Api::Quote do
       expect(response.json).to eq JSON.parse(QUOTE_NO_PLAN_RESPONSE)
     end
 
-    it "respects the plan_name param" do
+    context "passing in a plan_name" do
+      it "checks a valid plan name is passed in" do
+        PLANS.each do |plan|
+          params[:plan_name] = plan
+          expect(RestClient::Request).to receive(:execute).and_return(QUOTE_NO_PLAN_RESPONSE)
+          Sendle::Api::Quote.execute(params)
+        end
+
+        params[:plan_name] = 'invalid-plan'
+
+        expect {
+          Sendle::Api::Quote.execute(params)
+        }.to raise_error(Sendle::Api::Errors::InvalidPlan, "invalid-plan is not in the list of valid plans: easy, premium, pro")
+      end
+
+      xit "respects the plan_name param" do
+        params[:plan_name] = 'easy'
+
+        response = Sendle::Api::Quote.execute(params)
+      end
+    end
+
+    it "passes optional params" do
 
     end
 
