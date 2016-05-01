@@ -24,6 +24,7 @@ require 'sendle/utils/actions'
 
 # Api resources
 require 'sendle/api/ping'
+require 'sendle/api/quote'
 
 module Sendle
   module Api
