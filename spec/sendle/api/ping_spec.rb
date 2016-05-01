@@ -33,12 +33,20 @@ describe Sendle::Api::Ping do
       expect(pong).to be_a Sendle::Api::Responses::Pong
     end
 
-    it "handles unauthorized" do
+    it "handles unauthorized error" do
       expect(RestClient::Request).to receive(:execute).and_raise(UNAUTHORIZED_ERROR)
 
       expect {
         Sendle::Api::Ping.execute
       }.to raise_error(Sendle::Api::Errors::Unauthorized)
+    end
+
+    it "handles payment required error" do
+      expect(RestClient::Request).to receive(:execute).and_raise(PAYMENT_REQUIRED_ERROR)
+
+      expect {
+        Sendle::Api::Ping.execute
+      }.to raise_error(Sendle::Api::Errors::PaymentRequired)
     end
   end
 

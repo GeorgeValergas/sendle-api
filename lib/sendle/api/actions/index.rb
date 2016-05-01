@@ -13,9 +13,8 @@ module Sendle
             headers: Sendle::Api::Utils::Actions.json_headers
           )
           Sendle::Api::Responses::Pong.new
-        rescue RestClient::Unauthorized => e 
-          response = JSON.parse(e.response)
-          raise Sendle::Api::Errors::Unauthorized.new(response['error_description'])
+        rescue RestClient::Unauthorized, RestClient::PaymentRequired => e 
+          raise Sendle::Api::Factories::Errors.new_error(e)
         end
       end
     end
