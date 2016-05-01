@@ -30,7 +30,6 @@ module Sendle
               raise Sendle::Api::Errors::MissingParams.new(required)
             end
           end
-
         end
 
       end
