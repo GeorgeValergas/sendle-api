@@ -9,7 +9,7 @@ module Sendle
 
           response = RestClient::Request.execute(rest_client_params(params))
           self.process_response(response)
-        rescue RestClient::Unauthorized, RestClient::PaymentRequired => e 
+        rescue RestClient::Unauthorized, RestClient::PaymentRequired, RestClient::UnprocessableEntity => e 
           raise Sendle::Api::Factories::Errors.new_error(e)
         end
 

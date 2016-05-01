@@ -20,6 +20,7 @@ require 'sendle/api/errors/unauthorized'
 require 'sendle/api/errors/payment_required'
 require 'sendle/api/errors/missing_params'
 require 'sendle/api/errors/invalid_plan'
+require 'sendle/api/errors/unprocessable_entity'
 
 # Api responses
 require 'sendle/api/responses/pong'

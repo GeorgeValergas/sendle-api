@@ -57,19 +57,45 @@ describe Sendle::Api::Quote do
         }.to raise_error(Sendle::Api::Errors::InvalidPlan, "invalid-plan is not in the list of valid plans: easy, premium, pro")
       end
 
-      xit "respects the plan_name param" do
-        params[:plan_name] = 'easy'
+      it "respects the plan_name param" do
+        expected_params = {
+          method: :get,
+          url: Sendle::Api::Quote.url,
+          headers: {
+            accept: :json, 
+            content_type: :json,
+            params: params.merge(plan_name: PLAN_EASY)
+          }
+        }
+        expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(QUOTE_NO_PLAN_RESPONSE)
 
-        response = Sendle::Api::Quote.execute(params)
+        Sendle::Api::Quote.execute(params.merge(plan_name: PLAN_EASY))
       end
     end
 
     it "passes optional params" do
+      expected_params = {
+        method: :get,
+        url: Sendle::Api::Quote.url,
+        headers: {
+          accept: :json, 
+          content_type: :json,
+          params: params.merge(cubic_metre_volume: 0.5)
+        }
+      }
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(QUOTE_NO_PLAN_RESPONSE)
 
+      Sendle::Api::Quote.execute(params.merge(cubic_metre_volume: 0.5))
     end
 
     it "handles 422" do
+      expect(RestClient::Request).to receive(:execute).and_raise(UNPROCESSABLE_ENTITY_ERROR)
+      
+      params[:kilogram_weight] = "sdfsdf"
 
+      expect {
+        Sendle::Api::Quote.execute(params)
+      }.to raise_error(Sendle::Api::Errors::UnprocessableEntity, "Please fix the following errors and try again - kilogram_weight: is not a number")
     end
     
   end

@@ -8,4 +8,6 @@ UNAUTHORIZED_ERROR = RestClient::Unauthorized.new("{\"error\":\"unauthorised\",\
 
 PAYMENT_REQUIRED_ERROR = RestClient::PaymentRequired.new("{\"error\":\"payment_required\",\"error_description\":\"The account associated with this API key has no method of payment. Please go to your Account Settings in your Sendle Dashboard and add a payment method.\"}")
 
+UNPROCESSABLE_ENTITY_ERROR = RestClient::UnprocessableEntity.new("{\"messages\":{\"kilogram_weight\":[\"is not a number\"]},\"error\":\"unprocessable_entity\",\"error_description\":\"The data you supplied is invalid. Error messages are in the messages section. Please fix those fields and try again.\"}")
+
 QUOTE_NO_PLAN_RESPONSE = "[{\"quote\":{\"gross\":{\"amount\":9.75,\"currency\":\"AUD\"},\"net\":{\"amount\":8.86,\"currency\":\"AUD\"},\"tax\":{\"amount\":0.89,\"currency\":\"AUD\"}},\"plan_name\":\"Easy\"},{\"quote\":{\"gross\":{\"amount\":8.75,\"currency\":\"AUD\"},\"net\":{\"amount\":7.95,\"currency\":\"AUD\"},\"tax\":{\"amount\":0.8,\"currency\":\"AUD\"}},\"plan_name\":\"Premium\"},{\"quote\":{\"gross\":{\"amount\":5.98,\"currency\":\"AUD\"},\"net\":{\"amount\":5.44,\"currency\":\"AUD\"},\"tax\":{\"amount\":0.54,\"currency\":\"AUD\"}},\"plan_name\":\"Pro\"}]"
