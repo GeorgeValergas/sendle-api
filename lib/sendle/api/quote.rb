@@ -1,4 +1,4 @@
-class Sendle::Api::Ping
+class Sendle::Api::Quote
   extend Sendle::Api::Actions::Index
 
   class << self
@@ -6,10 +6,10 @@ class Sendle::Api::Ping
   end
 
   def self.url
-    Sendle::Api.base_url + "ping"
+    Sendle::Api.base_url + "quote"
   end
 
   def self.include_credentials?
-    true
+    false
   end
 end
