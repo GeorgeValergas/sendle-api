@@ -7,17 +7,15 @@ module Sendle
           Sendle::Api::Utils::Actions.check_for_missing_credentials if self.include_credentials?
           check_required_params(params)
 
-          RestClient::Request.execute(rest_client_params)
-          
+          RestClient::Request.execute(rest_client_params(params))
+
           Sendle::Api::Responses::Pong.new
         rescue RestClient::Unauthorized, RestClient::PaymentRequired => e 
           raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
-        def rest_client_params
-          rc_params = self.include_credentials? ? 
-                               Sendle::Api::Utils::Actions.common_params_with_credentials :
-                               Sendle::Api::Utils::Actions.common_params
+        def rest_client_params(params)
+          rc_params = self.include_credentials? ? common_params_with_credentials(params) : common_params(params)
           rc_params.merge(url: self.url)
         end
 
@@ -30,6 +28,19 @@ module Sendle
               raise Sendle::Api::Errors::MissingParams.new(required)
             end
           end
+        end
+
+        def common_params(params)
+          headers = Sendle::Api::Utils::Actions.json_headers
+          headers.merge!(params: params) unless params.empty?
+          {
+            method: :get,
+            headers: headers
+          }
+        end
+
+        def common_params_with_credentials(params)
+          common_params(params).merge(Sendle::Api::Utils::Actions.credential_params)
         end
 
       end

@@ -13,13 +13,6 @@ module Sendle
             { accept: :json, content_type: :json }
           end
 
-          def common_params
-            {
-              method: :get,
-              headers: Sendle::Api::Utils::Actions.json_headers
-            }
-          end
-
           def credential_params
             {
               user: Sendle::Api.sendle_id,
@@ -27,9 +20,6 @@ module Sendle
             }
           end
 
-          def common_params_with_credentials
-            common_params.merge(credential_params)
-          end
         end
 
       end
