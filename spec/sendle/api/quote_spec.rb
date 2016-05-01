@@ -39,16 +39,17 @@ describe Sendle::Api::Quote do
 
       response = Sendle::Api::Quote.execute(params)
 
-      expect(response).to eq JSON.parse(QUOTE_NO_PLAN_RESPONSE)
-    end
-
-    it "handles 422" do
-
+      expect(response.json).to eq JSON.parse(QUOTE_NO_PLAN_RESPONSE)
     end
 
     it "respects the plan_name param" do
 
     end
+
+    it "handles 422" do
+
+    end
+    
   end
 
 end

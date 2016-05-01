@@ -19,6 +19,7 @@ require 'sendle/api/errors/missing_params'
 
 # Api responses
 require 'sendle/api/responses/pong'
+require 'sendle/api/responses/json'
 
 # Utils
 require 'sendle/utils/common'

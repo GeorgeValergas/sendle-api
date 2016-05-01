@@ -17,7 +17,7 @@ class Sendle::Api::Quote
     end
 
     def process_response(response)
-      JSON.parse(response)
+      Sendle::Api::Responses::Json.new(response)
     end
   end
 
