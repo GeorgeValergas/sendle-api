@@ -15,11 +15,13 @@ require 'sendle/api/errors/missing_api_key'
 require 'sendle/api/errors/missing_sendle_id'
 require 'sendle/api/errors/unauthorized'
 require 'sendle/api/errors/payment_required'
+require 'sendle/api/errors/missing_params'
 
 # Api responses
 require 'sendle/api/responses/pong'
 
 # Utils
+require 'sendle/utils/common'
 require 'sendle/utils/actions'
 
 # Api resources

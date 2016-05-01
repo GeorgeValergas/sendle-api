@@ -3,13 +3,18 @@ class Sendle::Api::Quote
 
   class << self
     alias_method :execute, :index
+
+    def url
+      Sendle::Api.base_url + "quote"
+    end
+
+    def include_credentials?
+      false
+    end
+
+    def required_params
+      %w( pickup_suburb pickup_postcode delivery_suburb delivery_postcode kilogram_weight)
+    end
   end
 
-  def self.url
-    Sendle::Api.base_url + "quote"
-  end
-
-  def self.include_credentials?
-    false
-  end
 end
