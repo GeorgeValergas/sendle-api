@@ -5,7 +5,7 @@ class Sendle::Api::Order < Sendle::Api::Resource
     Sendle::Api.base_url + "orders"
   end
 
-  def validate_create_request(params)
+  def validate_create_request!(params)
     # Checking for required params of parcel
     required = %w( pickup_date kilogram_weight cubic_metre_volume )
     validate_presence_of!(required, params)

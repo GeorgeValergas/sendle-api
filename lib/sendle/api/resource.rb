@@ -14,7 +14,7 @@ class Sendle::Api::Resource
   end
 
   #Index action hook methods
-  def validate_index_request(params)
+  def validate_index_request!(params)
   end
 
   def process_index_response(response)
@@ -22,7 +22,7 @@ class Sendle::Api::Resource
   end
 
   #Create action hook methods
-  def validate_create_request(params)
+  def validate_create_request!(params)
   end
 
   def method_missing(m, *args, &blk)

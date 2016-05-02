@@ -5,7 +5,7 @@ module Sendle
 
         def create(params = {})
           check_for_missing_credentials
-          validate_create_request(params)
+          validate_create_request!(params)
         end
 
         def self.included(base)
