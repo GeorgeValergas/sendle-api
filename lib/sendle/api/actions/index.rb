@@ -2,7 +2,7 @@ module Sendle
   module Api
     module Actions
       module Index
-        
+
         def index(params = {})
           Sendle::Api::Utils::Actions.check_for_missing_credentials if self.include_credentials?
           self.validate_request(params) if self.respond_to?(:validate_request)
@@ -11,6 +11,10 @@ module Sendle
           self.process_response(response)
         rescue RestClient::Unauthorized, RestClient::PaymentRequired, RestClient::UnprocessableEntity => e 
           raise Sendle::Api::Factories::Errors.new_error(e)
+        end
+
+        def self.included(other)
+          other.extend(Sendle::Api::Sugars::Index)
         end
 
         private
