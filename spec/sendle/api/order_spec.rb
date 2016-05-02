@@ -187,7 +187,7 @@ describe Sendle::Api::Order do
       }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: id. Please check your request and try again.")
     end
 
-    xit "makes the correct request" do
+    it "makes the correct request" do
       expected_params = {
         method: :get,
         url: Sendle::Api::Order.url + "/#{order_id}",
@@ -200,6 +200,10 @@ describe Sendle::Api::Order do
       expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(ORDER_CREATED_RESPONSE)
 
       Sendle::Api::Order.show(order_id) 
+    end
+
+    it "returns the correct response" do
+
     end
   end
 

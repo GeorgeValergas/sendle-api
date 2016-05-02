@@ -5,6 +5,12 @@ module Sendle
 
         def show(id)
           raise Sendle::Api::Errors::MissingParams.new(['id']) if nullish?(id) 
+
+          request_params = rest_client_params
+          request_params[:method] = :get
+          request_params[:url] = url + '/' + id
+
+          request(request_params)
         end
 
         def self.included(base)
