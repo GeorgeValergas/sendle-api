@@ -57,7 +57,7 @@ params = { pickup_suburb: 'woolloomooloo',
 Sendle::Api::Quote.execute(params)
 ```
 
-Returns an instance of Sendle::Api::Responses::Pong upon a successful response. Once again, check the Sendle API docs for errors thrown.
+Returns an instance of Sendle::Api::Responses::Pong upon a successful response. 
 
 #### Errors
 Any of the methods described above can throw errors. Check the Sendle API docs for a list of errors and how to resolve them. 
