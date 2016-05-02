@@ -7,6 +7,8 @@ module Sendle
           check_for_missing_credentials
           validate_create_request!(params)
           request(params)
+        rescue RestClient::PreconditionFailed => e 
+          raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
         def self.included(base)

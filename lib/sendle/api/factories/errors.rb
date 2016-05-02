@@ -15,6 +15,8 @@ module Sendle
             Sendle::Api::Errors::PaymentRequired.new(error_text)
           when RestClient::UnprocessableEntity
             Sendle::Api::Errors::UnprocessableEntity.new(messages)
+          when  RestClient::PreconditionFailed
+            Sendle::Api::Errors::PreconditionFailed.new(error_text)
           end
         end
 
