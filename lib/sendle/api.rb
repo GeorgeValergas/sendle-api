@@ -12,6 +12,7 @@ require 'sendle/api/utils'
 
 # Syntax Sugar
 require 'sendle/api/sugars/index'
+require 'sendle/api/sugars/create'
 
 # Api resource actions
 require 'sendle/api/actions/index'
@@ -37,6 +38,7 @@ require 'sendle/api/responses/json'
 require 'sendle/api/resource'
 require 'sendle/api/ping'
 require 'sendle/api/quote'
+require 'sendle/api/order'
 
 module Sendle
   module Api
