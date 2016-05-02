@@ -32,7 +32,7 @@ shared_examples_for "a resource action with credentials" do
 
       expect {
         described_resource.send(described_action)
-      }.to_not raise_error 
+      }.to_not raise_error Sendle::Api::Errors::MissingApiKey
     end
   end
 

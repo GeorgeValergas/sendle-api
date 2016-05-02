@@ -11,7 +11,58 @@ describe Sendle::Api::Order do
   end
 
   describe "#create" do
+    let(:params) {
+      {
+        pickup_date: "2015-11-24",
+        description: "Kryptonite",
+        kilogram_weight: 1,
+        cubic_metre_volume: 0.01,
+        customer_reference: "SupBdayPressie",
+        sender: {
+          contact: {
+            name: "Lex Luthor",
+            phone: "0412 345 678"
+          },
+          address: {
+            address_line1: "123 Gotham Ln",
+            suburb: "Sydney",
+            state_name: "NSW",
+            postcode: "2000",
+            country: "Australia"
+          },
+          instructions: "Knock loudly"
+        },
+        receiver: {
+          contact: {
+            name: "Clark Kent",
+            email: "clarkissuper@dailyplanet.xyz"
+          },
+          address: {
+            address_line1: "80 Wentworth Park Road",
+            suburb: "Glebe",
+            state_name: "NSW",
+            postcode: "2037",
+            country: "Australia"
+          },
+          instructions: "Give directly to Clark"
+        }
+      }
+    }
+
     it_behaves_like "a resource action with credentials"
+
+    describe "parcel param validation" do
+      it "validates presence of required params" do
+        params[:pickup_date] = nil
+        params[:kilogram_weight] = nil
+        params[:cubic_metre_volume] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: pickup_date, kilogram_weight, cubic_metre_volume. Please check your request and try again.")
+      end
+
+    end
 
   end
 

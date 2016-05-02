@@ -5,6 +5,7 @@ module Sendle
 
         def create(params = {})
           Sendle::Api::Utils::Actions.check_for_missing_credentials if self.include_credentials?
+          validate_create_request(params)
         end
 
         def self.included(other)

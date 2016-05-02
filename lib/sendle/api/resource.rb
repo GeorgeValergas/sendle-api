@@ -20,4 +20,8 @@ class Sendle::Api::Resource
     Sendle::Api::Responses::Json.new(response)
   end
 
+  #Create action hook methods
+  def validate_create_request(params)
+  end
+
 end

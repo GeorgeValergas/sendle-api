@@ -9,7 +9,7 @@ module Sendle
           end
 
           def nullish?(v)
-            v.empty? || v.nil?
+            v.nil? || v.empty?
           end
         end
 
