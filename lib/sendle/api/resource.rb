@@ -16,7 +16,7 @@ class Sendle::Api::Resource
     Sendle::Api::Responses::Json.new(response)
   end
 
-  def validate_request(params)
+  def validate_index_request(params)
   end
 
 end

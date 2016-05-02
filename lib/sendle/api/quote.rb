@@ -13,7 +13,7 @@ class Sendle::Api::Quote < Sendle::Api::Resource
     false
   end
 
-  def validate_request(params)
+  def validate_index_request(params)
     # Checking for required params
     required = %w( pickup_suburb pickup_postcode delivery_suburb delivery_postcode kilogram_weight)
     Sendle::Api::Utils::Common.symbolize_strings(required).each do |required_param|

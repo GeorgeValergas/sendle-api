@@ -5,7 +5,7 @@ module Sendle
 
         def index(params = {})
           Sendle::Api::Utils::Actions.check_for_missing_credentials if include_credentials?
-          validate_request(params) 
+          validate_index_request(params) 
 
           response = RestClient::Request.execute(rest_client_params(params))
           process_response(response)
