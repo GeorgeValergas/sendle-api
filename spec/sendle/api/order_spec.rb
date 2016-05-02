@@ -81,11 +81,25 @@ describe Sendle::Api::Order do
       end
 
       it "validates name and phone of contact" do
-        params[:sender][:contact][:phone] = nil
+        expect {
+          [:phone, :name].each { |attr|  params[:sender][:contact][attr] = nil }
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: name, phone. Please check your request and try again.")
+      end
+
+      it "validates presence of address" do
+        params[:sender][:address] = nil
 
         expect {
           Sendle::Api::Order.create(params)
-        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: name, phone. Please check your request and try again.")
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: sender:address. Please check your request and try again.")
+      end
+
+      it "validates address_line1, suburb, postcode, state_name of the address" do
+        expect {
+          [:address_line1, :suburb, :postcode, :state_name].each { |attr|  params[:sender][:address][attr] = nil }
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: address_line1, suburb, postcode, state_name. Please check your request and try again.")
       end
     end 
 

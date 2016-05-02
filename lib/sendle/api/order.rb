@@ -12,10 +12,15 @@ class Sendle::Api::Order < Sendle::Api::Resource
 
     # Checking for sender params
     raise Sendle::Api::Errors::MissingParams.new(['sender']) unless hash_contains?(params, :sender) 
+
     sender_params = params[:sender]
     raise Sendle::Api::Errors::MissingParams.new(['sender:contact']) unless hash_contains?(sender_params, :contact) 
     required = %w( name phone )
     validate_presence_of!(required, sender_params[:contact])
+
+    raise Sendle::Api::Errors::MissingParams.new(['sender:address']) unless hash_contains?(sender_params, :address) 
+    required = %w( address_line1 suburb postcode state_name )
+    validate_presence_of!(required, sender_params[:address])
 
   end
 
