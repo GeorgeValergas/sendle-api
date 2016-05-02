@@ -15,6 +15,7 @@ require 'sendle/api/sugars/index'
 require 'sendle/api/sugars/create'
 
 # Api resource actions
+require 'sendle/api/actions/base'
 require 'sendle/api/actions/index'
 require 'sendle/api/actions/create'
 
