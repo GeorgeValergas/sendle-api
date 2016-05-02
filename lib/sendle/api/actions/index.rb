@@ -4,11 +4,11 @@ module Sendle
       module Index
 
         def index(params = {})
-          Sendle::Api::Utils::Actions.check_for_missing_credentials if self.include_credentials?
-          self.validate_request(params) if self.respond_to?(:validate_request)
+          Sendle::Api::Utils::Actions.check_for_missing_credentials if include_credentials?
+          validate_request(params) 
 
           response = RestClient::Request.execute(rest_client_params(params))
-          self.process_response(response)
+          process_response(response)
         rescue RestClient::Unauthorized, RestClient::PaymentRequired, RestClient::UnprocessableEntity => e 
           raise Sendle::Api::Factories::Errors.new_error(e)
         end
@@ -20,8 +20,8 @@ module Sendle
         private
 
           def rest_client_params(params)
-            rc_params = self.include_credentials? ? common_params_with_credentials(params) : common_params(params)
-            rc_params.merge(url: self.url)
+            rc_params = include_credentials? ? common_params_with_credentials(params) : common_params(params)
+            rc_params.merge(url: url)
           end
 
           def common_params(params)
