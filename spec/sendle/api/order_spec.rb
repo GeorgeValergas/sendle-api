@@ -167,6 +167,15 @@ describe Sendle::Api::Order do
       Sendle::Api::Order.create(params)
     end
 
+    it "returns the correct response" do
+      allow(RestClient::Request).to receive(:execute).and_return(ORDER_CREATED_RESPONSE)
+
+      response = Sendle::Api::Order.create(params)
+
+      expect(response).to be_a Sendle::Api::Responses::Json
+      expect(response.json).to eq JSON.parse(ORDER_CREATED_RESPONSE)
+    end
+
   end
 
 end

@@ -18,11 +18,15 @@ class Sendle::Api::Resource
   end
 
   def process_index_response(response)
-    Sendle::Api::Responses::Json.new(response)
+    return_json(response)
   end
 
   #Create action hook methods
   def validate_create_request!(params)
+  end
+
+  def process_create_response(response)
+    return_json(response)
   end
 
   def method_missing(m, *args, &blk)
@@ -34,6 +38,10 @@ class Sendle::Api::Resource
   end
 
   protected
+
+    def return_json(response)
+      Sendle::Api::Responses::Json.new(response)
+    end
 
     def validate_presence_of!(required_params, hash)
       symbolize_strings(required_params).each do |required_param|
