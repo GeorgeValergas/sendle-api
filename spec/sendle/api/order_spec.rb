@@ -178,4 +178,29 @@ describe Sendle::Api::Order do
 
   end
 
+  describe "#show" do
+    let(:order_id) { "9dbadcd6-ee57-488e-a175-49e378ad29ff" }
+
+    it "throws an error if id isn't provided" do
+      expect {
+        Sendle::Api::Order.show(nil)
+      }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: id. Please check your request and try again.")
+    end
+
+    xit "makes the correct request" do
+      expected_params = {
+        method: :get,
+        url: Sendle::Api::Order.url + "/#{order_id}",
+        headers: {
+          accept: :json, 
+          content_type: :json
+        }
+      }
+
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(ORDER_CREATED_RESPONSE)
+
+      Sendle::Api::Order.show(order_id) 
+    end
+  end
+
 end

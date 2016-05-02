@@ -13,11 +13,13 @@ require 'sendle/api/utils'
 # Syntax Sugar
 require 'sendle/api/sugars/index'
 require 'sendle/api/sugars/create'
+require 'sendle/api/sugars/show'
 
 # Api resource actions
 require 'sendle/api/actions/base'
 require 'sendle/api/actions/index'
 require 'sendle/api/actions/create'
+require 'sendle/api/actions/show'
 
 # Factories
 require 'sendle/api/factories/errors'
