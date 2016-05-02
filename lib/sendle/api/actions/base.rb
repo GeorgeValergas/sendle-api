@@ -4,7 +4,7 @@ module Sendle
       module Base
 
         def request(params)
-          RestClient::Request.execute(rest_client_params(params))
+          RestClient::Request.execute(params)
         rescue RestClient::PreconditionFailed, 
                RestClient::Unauthorized, 
                RestClient::PaymentRequired, 
@@ -12,37 +12,20 @@ module Sendle
           raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
-        protected
+        protected 
 
-          #Hook method
-          def http_method
-            :get
+          def rest_client_params
+            include_credentials? ? common_params_with_credentials : common_params
           end
 
-        private 
-
-          def requires_request_payload?
-            http_method == :post
-          end
-
-          def rest_client_params(params)
-            rc_params = include_credentials? ? common_params_with_credentials(params) : common_params(params)
-            rc_params.merge!(payload: params) if requires_request_payload?
-            rc_params.merge!(url: url)
-            rc_params
-          end
-
-          def common_params(params)
-            headers = json_headers
-            headers.merge!(params: params) if !requires_request_payload? && !params.empty?
+          def common_params
             {
-              method: http_method,
-              headers: headers
+              headers: json_headers
             }
           end
 
-          def common_params_with_credentials(params)
-            common_params(params).merge(credential_params)
+          def common_params_with_credentials
+            common_params.merge(credential_params)
           end
 
           def check_for_missing_credentials

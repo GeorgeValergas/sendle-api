@@ -6,7 +6,13 @@ module Sendle
         def index(params = {})
           check_for_missing_credentials if include_credentials?
           validate_index_request!(params) 
-          process_index_response(request(params))
+
+          request_params = rest_client_params
+          request_params[:method] = :get
+          request_params[:url] = url
+          request_params[:headers][:params] = params unless params.empty?
+
+          process_index_response(request(request_params))
         end
 
         def self.included(base)
