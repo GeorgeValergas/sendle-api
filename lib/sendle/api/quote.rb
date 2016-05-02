@@ -16,11 +16,7 @@ class Sendle::Api::Quote < Sendle::Api::Resource
   def validate_index_request(params)
     # Checking for required params
     required = %w( pickup_suburb pickup_postcode delivery_suburb delivery_postcode kilogram_weight)
-    symbolize_strings(required).each do |required_param|
-      if (!params.key?(required_param) || nullish?(params[required_param]))
-        raise Sendle::Api::Errors::MissingParams.new(required)
-      end
-    end
+    validate_presence_of!(required, params)
 
     # Checking for valid plan_name, if passed in
     if params[:plan_name]

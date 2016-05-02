@@ -33,4 +33,14 @@ class Sendle::Api::Resource
     end
   end
 
+  protected
+
+    def validate_presence_of!(required_params, hash)
+      symbolize_strings(required_params).each do |required_param|
+        if (!hash.key?(required_param) || nullish?(hash[required_param]))
+          raise Sendle::Api::Errors::MissingParams.new(required_params)
+        end
+      end
+    end
+
 end
