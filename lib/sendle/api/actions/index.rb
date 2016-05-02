@@ -7,8 +7,6 @@ module Sendle
           check_for_missing_credentials if include_credentials?
           validate_index_request!(params) 
           process_index_response(request(params))
-        rescue RestClient::Unauthorized, RestClient::PaymentRequired, RestClient::UnprocessableEntity => e 
-          raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
         def self.included(base)

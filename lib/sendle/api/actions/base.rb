@@ -5,6 +5,11 @@ module Sendle
 
         def request(params)
           RestClient::Request.execute(rest_client_params(params))
+        rescue RestClient::PreconditionFailed, 
+               RestClient::Unauthorized, 
+               RestClient::PaymentRequired, 
+               RestClient::UnprocessableEntity => e 
+          raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
         protected
