@@ -14,12 +14,14 @@ require 'sendle/api/utils'
 require 'sendle/api/sugars/index'
 require 'sendle/api/sugars/create'
 require 'sendle/api/sugars/show'
+require 'sendle/api/sugars/destroy'
 
 # Api resource actions
 require 'sendle/api/actions/base'
 require 'sendle/api/actions/index'
 require 'sendle/api/actions/create'
 require 'sendle/api/actions/show'
+require 'sendle/api/actions/destroy'
 
 # Factories
 require 'sendle/api/factories/errors'

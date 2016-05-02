@@ -212,4 +212,38 @@ describe Sendle::Api::Order do
     end
   end
 
+  describe "#destroy" do
+    let(:order_id) { "9dbadcd6-ee57-488e-a175-49e378ad29ff" }
+
+    it "throws an error if id isn't provided" do
+      expect {
+        Sendle::Api::Order.destroy(nil)
+      }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: id. Please check your request and try again.")
+    end
+
+    it "makes the correct request" do
+      expected_params = {
+        method: :delete,
+        url: Sendle::Api::Order.url + "/#{order_id}",
+        headers: {
+          accept: :json, 
+          content_type: :json
+        }
+      }
+
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(ORDER_CREATED_RESPONSE)
+
+      Sendle::Api::Order.show(order_id) 
+    end
+
+    xit "returns the correct response" do
+      allow(RestClient::Request).to receive(:execute).and_return(ORDER_GET_RESPONSE)
+
+      response = Sendle::Api::Order.show(order_id)
+
+      expect(response).to be_a Sendle::Api::Responses::Json
+      expect(response.json).to eq JSON.parse(ORDER_GET_RESPONSE)
+    end
+  end
+
 end

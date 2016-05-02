@@ -1,6 +1,7 @@
 class Sendle::Api::Order < Sendle::Api::Resource
   include Sendle::Api::Actions::Create
   include Sendle::Api::Actions::Show
+  include Sendle::Api::Actions::Destroy
 
   def url
     Sendle::Api.base_url + "orders"
