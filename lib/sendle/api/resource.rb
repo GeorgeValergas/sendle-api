@@ -34,6 +34,11 @@ class Sendle::Api::Resource
     return_json(response)
   end
 
+  #Destroy action hook methods
+  def process_destroy_response(response)
+    return_json(response)
+  end
+
   def method_missing(m, *args, &blk)
     if Sendle::Api::Utils.respond_to?(m)
       Sendle::Api::Utils.send(m, *args)

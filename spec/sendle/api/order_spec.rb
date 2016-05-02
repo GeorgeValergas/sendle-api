@@ -231,18 +231,18 @@ describe Sendle::Api::Order do
         }
       }
 
-      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(ORDER_CREATED_RESPONSE)
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(ORDER_DELETE_RESPONSE)
 
-      Sendle::Api::Order.show(order_id) 
+      Sendle::Api::Order.destroy(order_id) 
     end
 
-    xit "returns the correct response" do
-      allow(RestClient::Request).to receive(:execute).and_return(ORDER_GET_RESPONSE)
+    it "returns the correct response" do
+      allow(RestClient::Request).to receive(:execute).and_return(ORDER_DELETE_RESPONSE)
 
-      response = Sendle::Api::Order.show(order_id)
+      response = Sendle::Api::Order.destroy(order_id)
 
       expect(response).to be_a Sendle::Api::Responses::Json
-      expect(response.json).to eq JSON.parse(ORDER_GET_RESPONSE)
+      expect(response.json).to eq JSON.parse(ORDER_DELETE_RESPONSE)
     end
   end
 
