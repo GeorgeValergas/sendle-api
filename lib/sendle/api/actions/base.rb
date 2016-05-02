@@ -21,14 +21,20 @@ module Sendle
 
         private 
 
+          def requires_request_payload?
+            http_method == :post
+          end
+
           def rest_client_params(params)
             rc_params = include_credentials? ? common_params_with_credentials(params) : common_params(params)
-            rc_params.merge(url: url)
+            rc_params.merge!(payload: params) if requires_request_payload?
+            rc_params.merge!(url: url)
+            rc_params
           end
 
           def common_params(params)
             headers = json_headers
-            headers.merge!(params: params) unless params.empty?
+            headers.merge!(params: params) if !requires_request_payload? && !params.empty?
             {
               method: http_method,
               headers: headers
