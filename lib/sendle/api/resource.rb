@@ -4,6 +4,10 @@ class Sendle::Api::Resource
     raise "An API Resource must implement the url method."
   end
 
+  def self.url
+    self.new.url
+  end
+
   def include_credentials?
     true
   end
