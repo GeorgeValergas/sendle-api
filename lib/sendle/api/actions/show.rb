@@ -10,7 +10,7 @@ module Sendle
           request_params[:method] = :get
           request_params[:url] = url + '/' + id
 
-          request(request_params)
+          process_show_response(request(request_params))
         end
 
         def self.included(base)

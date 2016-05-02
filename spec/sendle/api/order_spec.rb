@@ -203,7 +203,12 @@ describe Sendle::Api::Order do
     end
 
     it "returns the correct response" do
+      allow(RestClient::Request).to receive(:execute).and_return(ORDER_GET_RESPONSE)
 
+      response = Sendle::Api::Order.show(order_id)
+
+      expect(response).to be_a Sendle::Api::Responses::Json
+      expect(response.json).to eq JSON.parse(ORDER_GET_RESPONSE)
     end
   end
 

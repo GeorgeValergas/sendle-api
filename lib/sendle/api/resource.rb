@@ -29,6 +29,11 @@ class Sendle::Api::Resource
     return_json(response)
   end
 
+  #Show action hook methods
+  def process_show_response(response)
+    return_json(response)
+  end
+
   def method_missing(m, *args, &blk)
     if Sendle::Api::Utils.respond_to?(m)
       Sendle::Api::Utils.send(m, *args)
