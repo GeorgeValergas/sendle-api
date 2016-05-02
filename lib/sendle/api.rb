@@ -7,11 +7,15 @@ require "sendle/api/version"
 # Constants
 require "sendle/api/constants"
 
+# Utils
+require 'sendle/api/utils'
+
 # Syntax Sugar
 require 'sendle/api/sugars/index'
 
 # Api resource actions
 require 'sendle/api/actions/index'
+require 'sendle/api/actions/create'
 
 # Factories
 require 'sendle/api/factories/errors'
@@ -28,10 +32,6 @@ require 'sendle/api/errors/unprocessable_entity'
 # Api responses
 require 'sendle/api/responses/pong'
 require 'sendle/api/responses/json'
-
-# Utils
-require 'sendle/utils/common'
-require 'sendle/utils/actions'
 
 # Api resources
 require 'sendle/api/resource'

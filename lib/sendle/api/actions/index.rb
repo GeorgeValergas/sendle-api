@@ -4,7 +4,7 @@ module Sendle
       module Index
 
         def index(params = {})
-          Sendle::Api::Utils::Actions.check_for_missing_credentials if include_credentials?
+          check_for_missing_credentials if include_credentials?
           validate_index_request(params) 
 
           response = RestClient::Request.execute(rest_client_params(params))
@@ -13,8 +13,8 @@ module Sendle
           raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
-        def self.included(other)
-          other.extend(Sendle::Api::Sugars::Index)
+        def self.included(base)
+          base.extend(Sendle::Api::Sugars::Index)
         end
 
         private
@@ -25,7 +25,7 @@ module Sendle
           end
 
           def common_params(params)
-            headers = Sendle::Api::Utils::Actions.json_headers
+            headers = json_headers
             headers.merge!(params: params) unless params.empty?
             {
               method: :get,
@@ -34,7 +34,7 @@ module Sendle
           end
 
           def common_params_with_credentials(params)
-            common_params(params).merge(Sendle::Api::Utils::Actions.credential_params)
+            common_params(params).merge(credential_params)
           end
 
       end

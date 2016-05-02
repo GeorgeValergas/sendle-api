@@ -8,8 +8,8 @@ class Sendle::Api::Order < Sendle::Api::Resource
   def validate_create_request(params)
     # Checking for required params
     required = %w( pickup_date kilogram_weight cubic_metre_volume )
-    Sendle::Api::Utils::Common.symbolize_strings(required).each do |required_param|
-      if (!params.key?(required_param) || Sendle::Api::Utils::Common.nullish?(params[required_param]))
+    Sendle::Api::Utils.symbolize_strings(required).each do |required_param|
+      if (!params.key?(required_param) || Sendle::Api::Utils.nullish?(params[required_param]))
         raise Sendle::Api::Errors::MissingParams.new(required)
       end
     end

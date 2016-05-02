@@ -4,12 +4,12 @@ module Sendle
       module Create
 
         def create(params = {})
-          Sendle::Api::Utils::Actions.check_for_missing_credentials if self.include_credentials?
+          check_for_missing_credentials
           validate_create_request(params)
         end
 
-        def self.included(other)
-          other.extend(Sendle::Api::Sugars::Create)
+        def self.included(base)
+          base.extend(Sendle::Api::Sugars::Create)
         end
 
       end
