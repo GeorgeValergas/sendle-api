@@ -1,6 +1,6 @@
 # Sendle::Api
 
-TODO: Write a gem description
+The Sendle API Ruby bindings provide a small SDK for convenient access to the Sendle API from applications written with the Ruby language.
 
 ## Installation
 
@@ -20,7 +20,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Before you can use the Sendle API, you need to sign up for an account. Once you have signed up, you need to send an email to sendle support requesting access to their API. When access has been granted, you will have access to your sendle_id and api_key, both which are required to access the api.
+
+If you are accessing the Sendle API in sandbox mode, you need to repeat the above process on their sandbox serers.
+
+### Configuration
+
+Before you can start using the library, you need to configure your api credentials. The instructions below assume you using this library from a Rails application.
+
+Create a file called 'sendle.rb' inside your config/initializers directory with the following contents:
+```
+Sendle::Api.api_key = Rails.application.secrets.sendle_api_key 
+Sendle::Api.sendle_id = Rails.application.secrets.sendle_id
+Sendle::Api.sandbox = true #Only if you are accessing the Sendle sandbox servers. Otherwise take out this line.
+```
+
+### Making a Request
+
 
 ## Contributing
 
