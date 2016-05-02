@@ -25,4 +25,12 @@ class Sendle::Api::Resource
   def validate_create_request(params)
   end
 
+  def method_missing(m, *args, &blk)
+    if Sendle::Api::Utils.respond_to?(m)
+      Sendle::Api::Utils.send(m, *args)
+    else
+      super(m, *args, blk)
+    end
+  end
+
 end
