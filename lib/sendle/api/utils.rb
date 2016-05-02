@@ -9,7 +9,11 @@ module Sendle
         end
 
         def nullish?(v)
-          v.nil? || v.empty?
+          v.nil? || v.to_s.empty?
+        end
+
+        def hash_contains?(hash, key)
+          hash.key?(key) && !hash[key].nil?
         end
 
       end

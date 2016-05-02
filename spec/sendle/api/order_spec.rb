@@ -61,8 +61,33 @@ describe Sendle::Api::Order do
           Sendle::Api::Order.create(params)
         }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: pickup_date, kilogram_weight, cubic_metre_volume. Please check your request and try again.")
       end
-
     end
+
+    describe "sender details" do
+      it "validates presence of sender object" do
+        params[:sender] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: sender. Please check your request and try again.")
+      end
+
+      it "validates presence of contact" do
+        params[:sender][:contact] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: sender:contact. Please check your request and try again.")
+      end
+
+      it "validates name and phone of contact" do
+        params[:sender][:contact][:phone] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: name, phone. Please check your request and try again.")
+      end
+    end 
 
   end
 

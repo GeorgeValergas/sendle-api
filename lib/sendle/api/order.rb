@@ -6,14 +6,27 @@ class Sendle::Api::Order < Sendle::Api::Resource
   end
 
   def validate_create_request(params)
-    # Checking for required params
+    # Checking for required params of parcel
     required = %w( pickup_date kilogram_weight cubic_metre_volume )
-    Sendle::Api::Utils.symbolize_strings(required).each do |required_param|
-      if (!params.key?(required_param) || Sendle::Api::Utils.nullish?(params[required_param]))
-        raise Sendle::Api::Errors::MissingParams.new(required)
+    validate_presence_of!(required, params)
+
+    # Checking for sender params
+    raise Sendle::Api::Errors::MissingParams.new(['sender']) unless hash_contains?(params, :sender) 
+    sender_params = params[:sender]
+    raise Sendle::Api::Errors::MissingParams.new(['sender:contact']) unless hash_contains?(sender_params, :contact) 
+    required = %w( name phone )
+    validate_presence_of!(required, sender_params[:contact])
+
+  end
+
+  protected
+
+  def validate_presence_of!(required_params, hash)
+    symbolize_strings(required_params).each do |required_param|
+      if (!hash.key?(required_param) || nullish?(hash[required_param]))
+        raise Sendle::Api::Errors::MissingParams.new(required_params)
       end
     end
-
   end
 
 end
