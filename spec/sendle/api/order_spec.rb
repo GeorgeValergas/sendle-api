@@ -103,6 +103,46 @@ describe Sendle::Api::Order do
       end
     end 
 
+    describe "receiver details" do
+      it "validates presence of receiver object" do
+        params[:receiver] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: receiver. Please check your request and try again.")
+      end
+
+      it "validates presence of contact" do
+        params[:receiver][:contact] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: receiver:contact. Please check your request and try again.")
+      end
+
+      it "validates name of receiver" do
+        expect {
+          params[:receiver][:contact][:name] = nil 
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: name. Please check your request and try again.")
+      end
+
+      it "validates presence of address" do
+        params[:receiver][:address] = nil
+
+        expect {
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: receiver:address. Please check your request and try again.")
+      end
+
+      it "validates address_line1, suburb, postcode, state_name of the address" do
+        expect {
+          [:address_line1, :suburb, :postcode, :state_name].each { |attr|  params[:receiver][:address][attr] = nil }
+          Sendle::Api::Order.create(params)
+        }.to raise_error(Sendle::Api::Errors::MissingParams, "The following params are required: address_line1, suburb, postcode, state_name. Please check your request and try again.")
+      end
+    end 
+
   end
 
 end
