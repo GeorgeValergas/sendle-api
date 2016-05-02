@@ -20,22 +20,47 @@ Or install it yourself as:
 
 ## Usage
 
-Before you can use the Sendle API, you need to sign up for an account. Once you have signed up, you need to send an email to sendle support requesting access to their API. When access has been granted, you will have access to your sendle_id and api_key, both which are required to access the api.
+Before you can use the Sendle API, you need to sign up for a Sendle account. Once you have signed up, you need to send an email to Sendle support requesting access to their API. When access has been granted, you will have access to your sendle_id and api_key, both which are required to access the api.
 
-If you are accessing the Sendle API in sandbox mode, you need to repeat the above process on their sandbox serers.
+If you are accessing the Sendle API in sandbox mode, you need to repeat the above process on Sendle's sandbox servers.
 
 ### Configuration
 
-Before you can start using the library, you need to configure your api credentials. The instructions below assume you using this library from a Rails application.
+Before you can start using the library, you need to configure your api credentials. The instructions below assume you are using this library from a Rails application.
 
-Create a file called 'sendle.rb' inside your config/initializers directory with the following contents:
+Create a file called 'sendle.rb' inside your config/initializers directory with the following content:
 ```
 Sendle::Api.api_key = Rails.application.secrets.sendle_api_key 
 Sendle::Api.sendle_id = Rails.application.secrets.sendle_id
-Sendle::Api.sandbox = true #Only if you are accessing the Sendle sandbox servers. Otherwise take out this line.
+Sendle::Api.sandbox = true #Only if you are accessing the Sendle sandbox servers, otherwise take out this line.
 ```
 
 ### Making a Request
+
+Sendle's API documentation can be found here: http://sendle.github.io/sendle-api-doc.
+
+#### Pinging the API
+```
+Sendle::Api::Ping.execute
+```
+
+Returns an instance of Sendle::Api::Responses::Pong upon a successful response from the API. 
+
+#### Getting a Delivery Quote
+```
+params = { pickup_suburb: 'woolloomooloo',
+           pickup_postcode: '2011',
+           delivery_suburb: 'eastgardens',
+           delivery_postcode: '2036',
+           kilogram_weight: '1'
+         }
+Sendle::Api::Quote.execute(params)
+```
+
+Returns an instance of Sendle::Api::Responses::Pong upon a successful response. Once again, check the Sendle API docs for errors thrown.
+
+#### Errors
+Any of the methods described above can throw errors. Check the Sendle API docs for a list of errors and how to resolve them. 
 
 
 ## Contributing
