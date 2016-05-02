@@ -31,6 +31,7 @@ require 'sendle/utils/common'
 require 'sendle/utils/actions'
 
 # Api resources
+require 'sendle/api/resource'
 require 'sendle/api/ping'
 require 'sendle/api/quote'
 
