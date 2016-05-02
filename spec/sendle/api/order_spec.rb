@@ -143,6 +143,14 @@ describe Sendle::Api::Order do
       end
     end 
 
+    it "handles 412" do
+      expect(RestClient::Request).to receive(:execute).and_raise(PRECONDITION_FAILED_ERROR)
+
+      expect {
+        Sendle::Api::Order.create(params)
+      }.to raise_error(Sendle::Api::Errors::PreconditionFailed, "The account associated with this API key has not accepted the dangerous goods terms. Please visit your Account Settings in https://www.sendle.com/dashboard/ to view and accept these terms.")
+    end
+
   end
 
 end

@@ -6,11 +6,18 @@ module Sendle
         def create(params = {})
           check_for_missing_credentials
           validate_create_request!(params)
+          request(params)
         end
 
         def self.included(base)
           base.extend(Sendle::Api::Sugars::Create)
         end
+
+        protected
+
+          def http_method
+            :post
+          end
 
       end
     end
