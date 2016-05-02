@@ -8,7 +8,7 @@ module Sendle
           validate_index_request(params) 
 
           response = RestClient::Request.execute(rest_client_params(params))
-          process_response(response)
+          process_index_response(response)
         rescue RestClient::Unauthorized, RestClient::PaymentRequired, RestClient::UnprocessableEntity => e 
           raise Sendle::Api::Factories::Errors.new_error(e)
         end

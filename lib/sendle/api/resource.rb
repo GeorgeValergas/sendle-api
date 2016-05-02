@@ -12,11 +12,12 @@ class Sendle::Api::Resource
     true
   end
 
-  def process_response(response)
-    Sendle::Api::Responses::Json.new(response)
+  #Index action hook methods
+  def validate_index_request(params)
   end
 
-  def validate_index_request(params)
+  def process_index_response(response)
+    Sendle::Api::Responses::Json.new(response)
   end
 
 end

@@ -9,7 +9,7 @@ class Sendle::Api::Ping < Sendle::Api::Resource
     Sendle::Api.base_url + "ping"
   end
 
-  def process_response(response)
+  def process_index_response(response)
     Sendle::Api::Responses::Pong.new
   end
 
