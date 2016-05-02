@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe Sendle::Api::Order do
 
-  let(:api_key) { 'fake-key' }
-  let(:sendle_id) { 'fake-id' }
+  let(:api_key) { 'fake_key' }
+  let(:sendle_id) { 'fake_id' }
 
   before do
     Sendle::Api.api_key = api_key
@@ -13,7 +13,7 @@ describe Sendle::Api::Order do
   describe "#create" do
     let(:params) {
       {
-        pickup_date: "2015-11-24",
+        pickup_date: "2016-05-05",
         description: "Kryptonite",
         kilogram_weight: 1,
         cubic_metre_volume: 0.01,
@@ -149,6 +149,22 @@ describe Sendle::Api::Order do
       expect {
         Sendle::Api::Order.create(params)
       }.to raise_error(Sendle::Api::Errors::PreconditionFailed, "The account associated with this API key has not accepted the dangerous goods terms. Please visit your Account Settings in https://www.sendle.com/dashboard/ to view and accept these terms.")
+    end
+
+    it "makes the correct request" do
+      expected_params = {
+        method: :post,
+        url: Sendle::Api::Order.url,
+        headers: {
+          accept: :json, 
+          content_type: :json
+        },
+        payload: params
+      }
+
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(ORDER_CREATED_RESPONSE)
+
+      Sendle::Api::Order.create(params)
     end
 
   end
