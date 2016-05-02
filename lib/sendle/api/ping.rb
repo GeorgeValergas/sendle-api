@@ -1,20 +1,24 @@
-class Sendle::Api::Ping
-  extend Sendle::Api::Actions::Index
+class Sendle::Api::Ping < Sendle::Api::Resource
+  include Sendle::Api::Actions::Index
 
   class << self
-    alias_method :execute, :index
+    def index(params = {})
+      self.new.index(params)
+    end
 
     def url
-      Sendle::Api.base_url + "ping"
+      self.new.url
     end
 
-    def include_credentials?
-      true
-    end
+    alias_method :execute, :index
+  end
 
-    def process_response(response)
-      Sendle::Api::Responses::Pong.new
-    end
+  def url
+    Sendle::Api.base_url + "ping"
+  end
+
+  def process_response(response)
+    Sendle::Api::Responses::Pong.new
   end
 
 end

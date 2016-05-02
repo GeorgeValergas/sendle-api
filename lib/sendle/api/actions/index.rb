@@ -13,23 +13,25 @@ module Sendle
           raise Sendle::Api::Factories::Errors.new_error(e)
         end
 
-        def rest_client_params(params)
-          rc_params = self.include_credentials? ? common_params_with_credentials(params) : common_params(params)
-          rc_params.merge(url: self.url)
-        end
+        private
 
-        def common_params(params)
-          headers = Sendle::Api::Utils::Actions.json_headers
-          headers.merge!(params: params) unless params.empty?
-          {
-            method: :get,
-            headers: headers
-          }
-        end
+          def rest_client_params(params)
+            rc_params = self.include_credentials? ? common_params_with_credentials(params) : common_params(params)
+            rc_params.merge(url: self.url)
+          end
 
-        def common_params_with_credentials(params)
-          common_params(params).merge(Sendle::Api::Utils::Actions.credential_params)
-        end
+          def common_params(params)
+            headers = Sendle::Api::Utils::Actions.json_headers
+            headers.merge!(params: params) unless params.empty?
+            {
+              method: :get,
+              headers: headers
+            }
+          end
+
+          def common_params_with_credentials(params)
+            common_params(params).merge(Sendle::Api::Utils::Actions.credential_params)
+          end
 
       end
     end
