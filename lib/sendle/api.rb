@@ -7,6 +7,9 @@ require "sendle/api/version"
 # Constants
 require "sendle/api/constants"
 
+# Syntax Sugar
+require 'sendle/api/sugars/index'
+
 # Api resource actions
 require 'sendle/api/actions/index'
 
