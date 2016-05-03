@@ -21,7 +21,7 @@ class Sendle::Api::Quote < Sendle::Api::Resource
     # Checking for valid plan_name, if passed in
     if params[:plan_name]
       plan_name = params[:plan_name]
-      raise Sendle::Api::Errors::InvalidPlan.new(plan_name) unless PLANS.include?(plan_name)
+      raise Sendle::Api::Errors::InvalidPlan.new(plan_name) unless Sendle::Api::PLANS.include?(plan_name)
     end
   end
 

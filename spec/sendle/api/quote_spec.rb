@@ -44,7 +44,7 @@ describe Sendle::Api::Quote do
 
     context "passing in a plan_name" do
       it "checks a valid plan name is passed in" do
-        PLANS.each do |plan|
+        Sendle::Api::PLANS.each do |plan|
           params[:plan_name] = plan
           expect(RestClient::Request).to receive(:execute).and_return(QUOTE_NO_PLAN_RESPONSE)
           Sendle::Api::Quote.execute(params)
@@ -64,12 +64,12 @@ describe Sendle::Api::Quote do
           headers: {
             accept: :json, 
             content_type: :json,
-            params: params.merge(plan_name: PLAN_EASY)
+            params: params.merge(plan_name: Sendle::Api::PLAN_EASY)
           }
         }
         expect(RestClient::Request).to receive(:execute).with(hash_including(expected_params)).and_return(QUOTE_NO_PLAN_RESPONSE)
 
-        Sendle::Api::Quote.execute(params.merge(plan_name: PLAN_EASY))
+        Sendle::Api::Quote.execute(params.merge(plan_name: Sendle::Api::PLAN_EASY))
       end
     end
 
