@@ -61,6 +61,57 @@ puts response.json #a hash
 
 Returns an instance of Sendle::Api::Responses::Json upon a successful response. 
 
+#### Creating an Order
+```
+params = {  pickup_date: "2016-05-05",
+            description: "Kryptonite",
+            kilogram_weight: 1,
+            cubic_metre_volume: 0.01,
+            customer_reference: "SupBdayPressie",
+            sender: {
+              contact: {
+                name: "Lex Luthor",
+                phone: "0412 345 678"
+              },
+              address: {
+                address_line1: "123 Gotham Ln",
+                suburb: "Sydney",
+                state_name: "NSW",
+                postcode: "2000",
+                country: "Australia"
+              },
+              instructions: "Knock loudly"
+            },
+            receiver: {
+              contact: {
+                name: "Clark Kent",
+                email: "clarkissuper@dailyplanet.xyz"
+              },
+              address: {
+                address_line1: "80 Wentworth Park Road",
+                suburb: "Glebe",
+                state_name: "NSW",
+                postcode: "2037",
+                country: "Australia"
+              },
+              instructions: "Give directly to Clark"
+            }
+          }
+response = Sendle::Api::Order.create(params) #response is an instance of Sendle::Api::Responses::Json
+```
+
+#### Viewing an Order
+```
+#response is an instance of Sendle::Api::Responses::Json
+response = Sendle::Api::Order.show("d9a5f8be-a245-4629-bfb5-e019bd9a2a06")
+```
+
+#### Cancelling an Order (only orders with is_cancellable attribute set to true can be cancelled.)
+```
+#response is an instance of Sendle::Api::Responses::Json
+response = Sendle::Api::Order.destroy("d9a5f8be-a245-4629-bfb5-e019bd9a2a06")
+```
+
 #### Errors
 Any of the methods described above can throw errors. Check the Sendle API docs for a list of errors and how to resolve them. 
 
