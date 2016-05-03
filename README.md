@@ -106,7 +106,7 @@ response = Sendle::Api::Order.create(params) #response is an instance of Sendle:
 response = Sendle::Api::Order.show("d9a5f8be-a245-4629-bfb5-e019bd9a2a06")
 ```
 
-#### Cancelling an Order (only orders with is_cancellable attribute set to true can be cancelled.)
+#### Cancelling an Order (only orders with is_cancellable attribute set to true can be cancelled)
 ```
 #response is an instance of Sendle::Api::Responses::Json
 response = Sendle::Api::Order.destroy("d9a5f8be-a245-4629-bfb5-e019bd9a2a06")
