@@ -54,7 +54,7 @@ describe Sendle::Api::Quote do
 
         expect {
           Sendle::Api::Quote.execute(params)
-        }.to raise_error(Sendle::Api::Errors::InvalidPlan, "invalid-plan is not in the list of valid plans: easy, premium, pro")
+        }.to raise_error(Sendle::Api::Errors::InvalidPlan, "invalid-plan is not in the list of valid plans: Easy, Premium, Pro")
       end
 
       it "respects the plan_name param" do

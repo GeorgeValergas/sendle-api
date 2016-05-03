@@ -1,8 +1,8 @@
 module Sendle
   module Api
-    PLAN_EASY = 'easy'
-    PLAN_PREMIUM = 'premium'
-    PLAN_PRO = 'pro'
+    PLAN_EASY = 'Easy'
+    PLAN_PREMIUM = 'Premium'
+    PLAN_PRO = 'Pro'
     PLANS = [ PLAN_EASY, PLAN_PREMIUM, PLAN_PRO ]
 
     ORDER_STATUS_PAYMENT = 'Payment'
