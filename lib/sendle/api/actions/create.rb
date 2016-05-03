@@ -19,12 +19,6 @@ module Sendle
           base.extend(Sendle::Api::Sugars::Create)
         end
 
-        protected
-
-          def http_method
-            :post
-          end
-
       end
     end
   end
